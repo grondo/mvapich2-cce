@@ -1,0 +1,74 @@
+AC_INIT()
+
+dnl Definitions will be placed in this file rather than in the DEFS variable
+AC_CONFIG_HEADER(pmiconf.h)
+AH_TOP([/* -*- Mode: C; c-basic-offset:4 ; -*- */
+/*
+ *  (C) 2008 by Argonne National Laboratory.
+ *      See COPYRIGHT in top-level directory.
+ */
+#ifndef PMICONF_H_INCLUDED
+#define PMICONF_H_INCLUDED
+])
+AH_BOTTOM([#endif])
+
+echo "RUNNING CONFIGURE FOR THE PMGR_COLLECTIVE PMI"
+
+PAC_ARG_CACHING
+PAC_VPATH_CHECK()
+PAC_LOAD_BASE_CACHE
+PAC_PROG_MAKE
+
+# read directory for pmgr_collective path from --with-pmgr=<dir> option
+AC_ARG_WITH(
+  pmgr,
+  AS_HELP_STRING([--with-pmgr], [path to the pmgr_collective package]),
+  [_x_ac_pmgr_with="$withval"
+    with_pmgr=yes],
+  [_x_ac_pmgr_with=no
+    with_pmgr=no]
+)
+
+# --with-pmgr was specified, check for header and library files
+if test "x$_x_ac_gcs_with" != xno ; then
+  # check that we can find the header file and link to the library
+  AC_CACHE_CHECK(
+    [for pmgr_collective installation],
+    [x_ac_cv_pmgr_dir],
+    [
+      for d in $_x_ac_pmgr_with; do
+        test -d "$d" || continue
+        test -d "$d/include" || continue
+        test -f "$d/include/pmi.h" || continue
+        test -d "$d/lib" || continue
+
+        _x_ac_pmgr_libs_save="$LIBS"
+        LIBS="-Wl,-rpath,-L${d}/lib -L${d}/lib -lpmi $LIBS"
+        AC_LINK_IFELSE(
+          AC_LANG_CALL([], [PMI_Init]),
+          AS_VAR_SET([x_ac_cv_pmgr_dir], [$d])
+        )
+        LIBS=$_x_ac_pmgr_libs_save
+
+        test -n "$x_ac_cv_pmgr_dir" && break
+      done
+    ]
+  )
+
+  # add flags to MPI wrappers to link to pmi2pmgr library
+  if test -n "$x_ac_cv_pmgr_dir"; then
+    PAC_PREPEND_FLAG([-L${x_ac_cv_pmgr_dir}/lib], [WRAPPER_LDFLAGS])
+    PAC_PREPEND_FLAG([-Wl,-rpath,${x_ac_cv_pmgr_dir}/lib], [WRAPPER_LDFLAGS])
+    PAC_PREPEND_FLAG([-lpmi], [WRAPPER_LIBS])
+    echo "FOUND PMGR_COLLECTIVE PMI: $WRAPPER_LDFLAGS $WRAPPER_LIBS"
+  else
+    AC_MSG_ERROR([PMGR_COLLECTIVE PMI NOT FOUND.  CONFIGURE ABORTED])
+  fi
+fi
+
+AC_SUBST(WRAPPER_CFLAGS)
+AC_SUBST(WRAPPER_LDFLAGS)
+AC_SUBST(WRAPPER_LIBS)
+
+AC_OUTPUT(localdefs)
+AC_OUTPUT(Makefile)
