@@ -1,0 +1,22 @@
+<dir>
+<file name="numa.h" info="1305048566"/>
+<file name="windows.h" info="1305048566"/>
+<file name="cpuset.h" info="1305048566"/>
+<file name="pthread_np.h" info="1301023350"/>
+<file name="kstat.h" info="1305048566"/>
+<file name="radset.h" info="1305048566"/>
+</dir>
+<data>
+<fileinfo name="numa.h">
+</fileinfo>
+<fileinfo name="windows.h">
+</fileinfo>
+<fileinfo name="cpuset.h">
+</fileinfo>
+<fileinfo name="pthread_np.h">
+</fileinfo>
+<fileinfo name="kstat.h">
+</fileinfo>
+<fileinfo name="radset.h">
+</fileinfo>
+</data>

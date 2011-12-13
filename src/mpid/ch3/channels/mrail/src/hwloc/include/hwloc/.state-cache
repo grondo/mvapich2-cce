@@ -1,0 +1,37 @@
+<dir>
+<file name="bitmap.h" info="1305048566"/>
+<file name="cuda.h" info="1305048566"/>
+<file name="openfabrics-verbs.h" info="1305048566"/>
+<file name="cpuset.h" info="1305048566"/>
+<file name="linux-libnuma.h" info="1305048566"/>
+<file name="myriexpress.h" info="1305048566"/>
+<file name="glibc-sched.h" info="1305048566"/>
+<file name="helper.h" info="1318017810"/>
+<file name="rename.h" info="1318017810"/>
+<file name="cudart.h" info="1305048566"/>
+<file name="linux.h" info="1315329100"/>
+</dir>
+<data>
+<fileinfo name="bitmap.h">
+</fileinfo>
+<fileinfo name="cuda.h">
+</fileinfo>
+<fileinfo name="openfabrics-verbs.h">
+</fileinfo>
+<fileinfo name="cpuset.h">
+</fileinfo>
+<fileinfo name="linux-libnuma.h">
+</fileinfo>
+<fileinfo name="myriexpress.h">
+</fileinfo>
+<fileinfo name="glibc-sched.h">
+</fileinfo>
+<fileinfo name="helper.h">
+</fileinfo>
+<fileinfo name="rename.h">
+</fileinfo>
+<fileinfo name="cudart.h">
+</fileinfo>
+<fileinfo name="linux.h">
+</fileinfo>
+</data>

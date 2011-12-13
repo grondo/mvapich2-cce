@@ -1,0 +1,918 @@
+MVAPICH2 Changelog
+------------------
+This file briefly describes the changes to the MVAPICH2 software
+package.  The logs are arranged in the "most recent first" order.
+
+MVAPICH2-1.7 (10/14/2011)
+
+* Features and Enhancements (since 1.7rc2):
+    - Support SHMEM collectives upto 64 cores/node
+    - Update to hwloc v1.2.2
+    - Enhancement and tuned collective (GatherV)
+
+* Bug Fixes:
+    - Fixes for code compilation warnings
+    - Fix job clean-up issues with mpirun_rsh
+    - Fix a hang with RDMA CM
+
+MVAPICH2-1.7rc2 (09/19/2011)
+
+* Features and Enhancements (since 1.7rc1):
+    - Based on MPICH2-1.4.1p1
+    - Integrated Hybrid (UD-RC/XRC) design to get best performance
+      on large-scale systems with reduced/constant memory footprint
+    - Shared memory backed Windows for One-Sided Communication
+    - Support for truly passive locking for intra-node RMA in shared
+      memory and LIMIC based windows
+    - Integrated with Portable Hardware Locality (hwloc v1.2.1)
+    - Integrated with latest OSU Micro-Benchmarks (3.4)
+    - Enhancements and tuned collectives (Allreduce and Allgatherv)
+    - MPI_THREAD_SINGLE provided by default and MPI_THREAD_MULTIPLE as an
+      option
+    - Enabling Checkpoint/Restart support in pure SMP mode
+    - Optimization for QDR cards
+    - On-demand connection management support with IB CM (RoCE interface)
+    - Optimization to limit number of RDMA Fast Path connections for very large
+      clusters (Nemesis interface)
+    - Multi-core-aware collective support (QLogic PSM interface)
+
+* Bug Fixes:
+    - Fixes for code compilation warnings
+    - Compiler preference lists reordered to avoid mixing GCC and Intel
+      compilers if both are found by configure
+    - Fix a bug in transferring very large messages (>2GB)
+        - Thanks to Tibor Pausz from Univ. of Frankfurt for reporting it
+    - Fix a hang with One-Sided Put operation
+    - Fix a bug in ptmalloc integration
+    - Avoid double-free crash with mpispawn
+    - Avoid crash and print an error message in mpirun_rsh when the hostfile is
+      empty
+    - Checking for error codes in PMI design
+    - Verify programs can link with LiMIC2 at runtime
+    - Fix for compilation issue when BLCR or FTB installed in non-system paths
+    - Fix an issue with RDMA-Migration
+    - Fix for memory leaks
+    - Fix an issue in supporting RoCE with second port on available on HCA
+        - Thanks to Jeffrey Konz from HP for reporting it
+    - Fix for a hang with passive RMA tests (QLogic PSM interface)
+
+MVAPICH2-1.7rc1 (07/20/2011)
+
+* Features and Enhancements (since 1.7a2)
+    - Based on MPICH2-1.4
+    - CH3 shared memory channel for standalone hosts (including laptops)
+      without any InfiniBand adapters
+    - HugePage support
+    - Improved on-demand InfiniBand connection setup
+    - Optimized Fence synchronization (with and without LIMIC2 support)
+    - Enhanced mpirun_rsh design to avoid race conditions and support for
+      improved debug messages
+    - Optimized design for collectives (Bcast and Reduce)
+    - Improved performance for medium size messages for QLogic PSM
+    - Support for Ekopath Compiler
+
+* Bug Fixes
+    - Fixes in Dynamic Process Management (DPM) support
+    - Fixes in Checkpoint/Restart and Migration support
+    - Fix Restart when using automatic checkpoint
+        - Thanks to Alexandr for reporting this
+    - Compilation warnings fixes
+    - Handling very large one-sided transfers using RDMA
+    - Fixes for memory leaks
+    - Graceful handling of unknown HCAs
+    - Better handling of shmem file creation errors
+    - Fix for a hang in intra-node transfer
+    - Fix for a build error with --disable-weak-symbols
+        - Thanks to Peter Willis for reporting this issue
+    - Fixes for one-sided communication with passive target synchronization
+    - Proper error reporting when a program is linked with both static and
+      shared MVAPICH2 libraries
+
+MVAPICH2-1.7a2 (06/03/2011)
+
+* Features and Enhancements (Since 1.7a)
+    - Improved intra-node shared memory communication performance
+    - Tuned RDMA Fast Path Buffer size to get better performance
+      with less memory footprint (CH3 and Nemesis)
+    - Fast process migration using RDMA
+    - Automatic inter-node communication parameter tuning
+      based on platform and adapter detection (Nemesis)
+    - Automatic intra-node communication parameter tuning
+      based on platform
+    - Efficient connection set-up for multi-core systems
+    - Enhancements for collectives (barrier, gather and allgather)
+    - Compact and shorthand way to specify blocks of processes on the same
+      host with mpirun_rsh
+    - Support for latest stable version of HWLOC v1.2
+    - Improved debug message output in process management and fault tolerance
+      functionality
+    - Better handling of process signals and error management in mpispawn
+    - Performance tuning for pt-to-pt and several collective operations
+
+* Bug fixes
+    - Fixes for memory leaks
+    - Fixes in CR/migration
+    - Better handling of memory allocation and registration failures
+    - Fixes for compilation warnings
+    - Fix a bug that disallows '=' from mpirun_rsh arguments
+    - Handling of non-contiguous transfer in Nemesis interface
+    - Bug fix in gather collective when ranks are in cyclic order
+    - Fix for the ignore_locks bug in MPI-IO with Lustre
+
+MVAPICH2-1.7a (04/19/2011)
+
+* Features and Enhancements 
+
+    - Based on MPICH2-1.3.2p1
+    - Integrated with Portable Hardware Locality (hwloc v1.1.1)
+    - Supporting Large Data transfers (>2GB)
+    - Integrated with Enhanced LiMIC2 (v0.5.5) to support Intra-node
+      large message (>2GB) transfers
+    - Optimized and tuned algorithm for AlltoAll
+    - Enhanced debugging config options to generate
+      core files and back-traces
+    - Support for Chelsio's T4 Adapter
+
+MVAPICH2-1.6 (03/09/2011)
+
+* Features and Enhancements (since 1.6-RC3)
+    - Improved configure help for MVAPICH2 features
+    - Updated Hydra launcher with MPICH2-1.3.3 Hydra process manager
+    - Building and installation of OSU micro benchmarks during default
+      MVAPICH2 installation
+    - Hydra is the default mpiexec process manager
+
+* Bug fixes (since 1.6-RC3)
+    - Fix hang issues in RMA
+    - Fix memory leaks
+    - Fix in RDMA_FP
+
+MVAPICH2-1.6-RC3 (02/15/2011)
+
+* Features and Enhancements
+    - Support for 3D torus topology with appropriate SL settings
+        - For both CH3 and Nemesis interfaces
+    - Thanks to Jim Schutt, Marcus Epperson and John Nagle from
+      Sandia for the initial patch
+    - Quality of Service (QoS) support with multiple InfiniBand SL
+        - For both CH3 and Nemesis interfaces
+    - Configuration file support (similar to the one available in MVAPICH).
+      Provides a convenient method for handling all runtime variables 
+      through a configuration file.
+    - Improved job-startup performance on large-scale systems
+    - Optimization in MPI_Finalize
+    - Improved pt-to-pt communication performance for small and
+      medium messages
+    - Optimized and tuned algorithms for Gather and Scatter collective
+      operations
+    - Optimized thresholds for one-sided RMA operations
+    - User-friendly configuration options to enable/disable various
+      checkpoint/restart and migration features
+    - Enabled ROMIO's auto detection scheme for filetypes
+      on Lustre file system
+    - Improved error checking for system and BLCR calls in
+      checkpoint-restart and migration codepath
+    - Enhanced OSU Micro-benchmarks suite (version 3.3)
+
+Bug Fixes
+    - Fix in aggregate ADIO alignment
+    - Fix for an issue with LiMIC2 header
+    - XRC connection management
+    - Fixes in registration cache
+    - IB card detection with MV2_IBA_HCA runtime option in
+      multi rail design
+    - Fix for a bug in multi-rail design while opening multiple HCAs
+    - Fixes for multiple memory leaks
+    - Fix for a bug in mpirun_rsh
+    - Checks before enabling aggregation and migration
+    - Fixing the build errors with --disable-cxx
+    - Thanks to Bright Yang for reporting this issue
+    - Fixing the build errors related to "pthread_spinlock_t"
+      seen on RHEL systems
+
+MVAPICH2-1.6-RC2 (12/22/2010)
+
+* Features and Enhancements
+    - Optimization and enhanced performance for clusters with nVIDIA
+      GPU adapters (with and without GPUDirect technology)
+    - Enhanced R3 rendezvous protocol
+        - For both CH3 and Nemesis interfaces
+    - Robust RDMA Fast Path setup to avoid memory allocation
+      failures
+        - For both CH3 and Nemesis interfaces
+    - Multiple design enhancements for better performance of
+      medium sized messages
+    - Enhancements and optimizations for one sided Put and Get operations
+    - Enhancements and tuning of Allgather for small and medium
+      sized messages
+    - Optimization of AllReduce
+    - Enhancements to Multi-rail Design and features including striping
+      of one-sided messages
+    - Enhancements to mpirun_rsh job start-up scheme
+    - Enhanced designs for automatic detection of various
+      architectures and adapters
+
+* Bug fixes
+    - Fix a bug in Post-Wait/Start-Complete path for one-sided
+      operations
+    - Resolving a hang in mpirun_rsh termination when CR is enabled
+    - Fixing issue in MPI_Allreduce and Reduce when called with MPI_IN_PLACE
+        - Thanks to the initial patch by Alexander Alekhin
+    - Fix for an issue in rail selection for small RMA messages
+    - Fix for threading related errors with comm_dup
+    - Fix for alignment issues in RDMA Fast Path
+    - Fix for extra memcpy in header caching
+    - Fix for an issue to use correct HCA when process to rail binding
+      scheme used in combination with XRC.
+    - Fix for an RMA issue when configured with enable-g=meminit
+        - Thanks to James Dinan of Argonne for reporting this issue
+    - Only set FC and F77 if gfortran is executable
+
+
+MVAPICH2-1.6RC1 (11/12/2010)
+
+* Features and Enhancements
+    - Using LiMIC2 for efficient intra-node RMA transfer to avoid extra 
+      memory copies
+    - Upgraded to LiMIC2 version 0.5.4
+    - Removing the limitation on number of concurrent windows in RMA
+      operations
+    - Support for InfiniBand Quality of Service (QoS) with multiple lanes
+    - Enhanced support for multi-threaded applications
+    - Fast Checkpoint-Restart support with aggregation scheme
+    - Job Pause-Migration-Restart Framework for Pro-active Fault-Tolerance
+    - Support for new standardized Fault Tolerant Backplane (FTB) Events
+      for Checkpoint-Restart and Job Pause-Migration-Restart Framework
+    - Dynamic detection of multiple InfiniBand adapters and using these
+      by default in multi-rail configurations (OLA-IB-CH3, OFA-iWARP-CH3 and
+      OFA-RoCE-CH3 interfaces)
+    - Support for process-to-rail binding policy (bunch, scatter and
+      user-defined) in multi-rail configurations (OFA-IB-CH3, OFA-iWARP-CH3 and
+      OFA-RoCE-CH3 interfaces)
+    - Enhanced and optimized algorithms for MPI_Reduce and MPI_AllReduce
+      operations for small and medium message sizes.
+    - XRC support with Hydra Process Manager
+    - Improved usability of process to CPU mapping with support of
+      delimiters (',' , '-') in CPU listing
+	- Thanks to Gilles Civario for the initial patch
+    - Use of gfortran as the default F77 compiler
+    - Support of Shared-Memory-Nemesis interface on multi-core platforms
+      requiring intra-node communication only (SMP-only systems, laptops, etc. )
+    
+* Bug fixes
+    - Fix for memory leak in one-sided code with --enable-g=all
+       --enable-error-messages=all
+    - Fix for memory leak in getting the context of intra-communicator
+    - Fix for shmat() return code check
+    - Fix for issues with inter-communicator collectives in Nemesis
+    - KNEM patch for osu_bibw issue with KNEM version 0.9.2
+    - Fix for osu_bibw error with Shared-memory-Nemesis interface
+    - Fix for Win_test error for one-sided RDMA
+    - Fix for a hang in collective when thread level is set to multiple
+    - Fix for intel test errors with rsend, bsend and ssend operations in Nemesis
+    - Fix for memory free issue when it allocated by scandir
+    - Fix for a hang in Finalize
+    - Fix for issue with MPIU_Find_local_and_external when it is called
+      from MPIDI_CH3I_comm_create
+    - Fix for handling CPPFLGS values with spaces
+    - Dynamic Process Management to work with XRC support
+    - Fix related to disabling CPU affinity when shared memory is turned off at run time
+
+- MVAPICH2-1.5.1 (09/14/10)
+
+* Features and Enhancements
+    - Significantly reduce memory footprint on some systems by changing the
+      stack size setting for multi-rail configurations
+    - Optimization to the number of RDMA Fast Path connections
+    - Performance improvements in Scatterv and Gatherv collectives for CH3
+      interface (Thanks to Dan Kokran and Max Suarez of NASA for identifying
+      the issue)
+    - Tuning of Broadcast Collective
+    - Support for tuning of eager thresholds based on both adapter and platform
+      type
+    - Environment variables for message sizes can now be expressed in short
+      form K=Kilobytes and M=Megabytes (e.g.  MV2_IBA_EAGER_THRESHOLD=12K)
+    - Ability to selectively use some or all HCAs using colon separated lists.
+      e.g. MV2_IBA_HCA=mlx4_0:mlx4_1
+    - Improved Bunch/Scatter mapping for process binding with HWLOC and SMT
+      support (Thanks to Dr. Bernd Kallies of ZIB for ideas and suggestions)
+    - Update to Hydra code from MPICH2-1.3b1
+    - Auto-detection of various iWARP adapters
+    - Specifying MV2_USE_IWARP=1 is no longer needed when using iWARP
+    - Changing automatic eager threshold selection and tuning for iWARP
+      adapters based on number of nodes in the system instead of the number of
+      processes
+    - PSM progress loop optimization for QLogic Adapters (Thanks to Dr.
+      Avneesh Pant of QLogic for the patch)
+
+* Bug fixes
+    - Fix memory leak in registration cache with --enable-g=all
+    - Fix memory leak in operations using datatype modules
+    - Fix for rdma_cross_connect issue for RDMA CM. The server is prevented
+      from initiating a connection.
+    - Don't fail during build if RDMA CM is unavailable
+    - Various mpirun_rsh bug fixes for CH3, Nemesis and uDAPL interfaces
+    - ROMIO panfs build fix
+    - Update panfs for not-so-new ADIO file function pointers
+    - Shared libraries can be generated with unknown compilers
+    - Explicitly link against DL library to prevent build error due to DSO link
+      change in Fedora 13 (introduced with gcc-4.4.3-5.fc13)
+    - Fix regression that prevents the proper use of our internal HWLOC
+      component
+    - Remove spurious debug flags when certain options are selected at build
+      time
+    - Error code added for situation when received eager SMP message is larger
+      than receive buffer
+    - Fix for Gather and GatherV back-to-back hang problem with LiMIC2
+    - Fix for packetized send in Nemesis
+    - Fix related to eager threshold in nemesis ib-netmod
+    - Fix initialization parameter for Nemesis based on adapter type
+    - Fix for uDAPL one sided operations (Thanks to Jakub Fedoruk from Intel
+      for reporting this)
+    - Fix an issue with out-of-order message handling for iWARP
+    - Fixes for memory leak and Shared context Handling in PSM for QLogic
+      Adapters (Thanks to Dr. Avneesh Pant of QLogic for the patch)
+
+
+MVAPICH2-1.5 (07/09/10)
+
+* Features and Enhancements (since 1.5-RC2)
+    - SRQ turned on by default for Nemesis interface
+    - Performance tuning - adjusted eager thresholds for
+      variety of architectures, vbuf size based on adapter
+      types and vbuf pool sizes
+    - Tuning for Intel iWARP NE020 adapter, thanks to Harry
+      Cropper of Intel
+    - Introduction of a retry mechanism for RDMA_CM connection
+      establishment
+
+* Bug fixes (since 1.5-RC2)
+    - Fix in build process with hwloc (for some Distros)
+    - Fix for memory leak (Nemesis interface)
+
+
+MVAPICH2-1.5-RC2 (06/21/10)
+
+* Features and Enhancements (since 1.5-RC1)
+    - Support for hwloc library (1.0.1) for defining CPU affinity
+    - Deprecating the PLPA support for defining CPU affinity
+    - Efficient CPU affinity policies (bunch and scatter) to
+      specify CPU affinity per job for modern multi-core platforms
+    - New flag in mpirun_rsh to execute tasks with different group IDs
+    - Enhancement to the design of Win_complete for RMA operations
+    - Flexibility to support variable number of RMA windows
+    - Support for Intel iWARP NE020 adapter
+
+* Bug fixes (since 1.5-RC1)
+    - Compilation issue with the ROMIO adio-lustre driver, thanks
+      to Adam Moody of LLNL for reporting the issue
+    - Allowing checkpoint-restart for large-scale systems
+    - Correcting a bug in clear_kvc function. Thanks to T J (Chris) Ward,
+      IBM Research, for reporting and providing the resolving patch
+    - Shared lock operations with RMA with scatter process distribution.
+      Thanks to Pavan Balaji of Argonne for reporting this issue
+    - Fix a bug during window creation in uDAPL
+    - Compilation issue with --enable-alloca, Thanks to E. Borisch,
+      for reporting and providing the patch
+    - Improved error message for ibv_poll_cq failures
+    - Fix an issue that prevents mpirun_rsh to execute programs without
+      specifying the path from directories in PATH
+    - Fix an issue of mpirun_rsh with Dynamic Process Migration (DPM)
+    - Fix for memory leaks (both CH3 and Nemesis interfaces)
+    - Updatefiles correctly update LiMIC2
+    - Several fixes to the registration cache
+      (CH3, Nemesis and uDAPL interfaces)
+    - Fix to multi-rail communication
+    - Fix to Shared Memory communication Progress Engine
+    - Fix to all-to-all collective for large number of processes
+
+
+MVAPICH2-1.5-RC1 (05/04/10)
+
+* Features and Enhancements 
+    - MPI 2.2 compliant 
+    - Based on MPICH2-1.2.1p1 
+    - OFA-IB-Nemesis interface design 
+        - OpenFabrics InfiniBand network module support for 
+          MPICH2 Nemesis modular design 
+        - Support for high-performance intra-node shared memory 
+          communication provided by the Nemesis design 
+        - Adaptive RDMA Fastpath with Polling Set for high-performance 
+          inter-node communication 
+        - Shared Receive Queue (SRQ) support with flow control, 
+          uses significantly less memory for MPI library 
+        - Header caching 
+        - Advanced AVL tree-based Resource-aware registration cache 
+        - Memory Hook Support provided by integration with ptmalloc2 
+          library. This provides safe release of memory to the 
+          Operating System and is expected to benefit the memory 
+          usage of applications that heavily use malloc and free
+		  operations. 
+        - Support for TotalView debugger 
+        - Shared Library Support for existing binary MPI application 
+          programs to run ROMIO Support for MPI-IO
+        - Support for additional features (such as hwloc, 
+          hierarchical collectives, one-sided, multithreading, etc.), 
+          as included in the MPICH2 1.2.1p1 Nemesis channel 
+    - Flexible process manager support 
+        - mpirun_rsh to work with any of the eight interfaces 
+          (CH3 and Nemesis channel-based) including OFA-IB-Nemesis, 
+          TCP/IP-CH3 and TCP/IP-Nemesis 
+        - Hydra process manager to work with any of the eight interfaces 
+          (CH3 and Nemesis channel-based) including OFA-IB-CH3, 
+          OFA-iWARP-CH3, OFA-RoCE-CH3 and TCP/IP-CH3 
+    - MPIEXEC_TIMEOUT is honored by mpirun_rsh
+
+* Bug fixes since 1.4.1
+    - Fix compilation error when configured with
+      `--enable-thread-funneled'
+    - Fix MPE functionality, thanks to Anthony Chan  for
+      reporting and providing the resolving patch
+    - Cleanup after a failure in the init phase is handled better by
+      mpirun_rsh
+    - Path determination is correctly handled by mpirun_rsh when DPM is
+      used
+    - Shared libraries are correctly built (again)
+
+
+MVAPICH2-1.4.1
+
+* Enhancements since mvapich2-1.4
+   - MPMD launch capability to mpirun_rsh
+   - Portable Hardware Locality (hwloc) support, patch suggested by
+     Dr. Bernd Kallies <kallies@zib.de>
+   - Multi-port support for iWARP
+   - Enhanced iWARP design for scalability to higher process count
+   - Ring based startup support for RDMAoE
+
+* Bug fixes since mvapich2-1.4
+   - Fixes for MPE and other profiling tools
+     as suggested by Anthony Chan (chan@mcs.anl.gov)
+   - Fixes for finalization issue with dynamic process management
+   - Removed overrides to PSM_SHAREDCONTEXT, PSM_SHAREDCONTEXTS_MAX variables. 
+     Suggested by Ben Truscott <b.s.truscott@bristol.ac.uk>. 
+   - Fixing the error check for buffer aliasing in MPI_Reduce as
+     suggested by Dr. Rajeev Thakur <thakur@mcs.anl.gov>
+   - Fix Totalview integration for RHEL5
+   - Update simplemake to handle build timestamp issues
+   - Fixes for --enable-g={mem, meminit}
+   - Improved logic to control the receive and send requests to handle the
+     limitation of CQ Depth on iWARP
+   - Fixing assertion failures with IMB-EXT tests
+   - VBUF size for very small iWARP clusters bumped up to 33K
+   - Replace internal mallocs with MPIU_Malloc uniformly for correct
+     tracing with --enable-g=mem
+   - Fixing multi-port for iWARP
+   - Fix memory leaks
+   - Shared-memory reduce fixes for MPI_Reduce invoked with MPI_IN_PLACE
+   - Handling RDMA_CM_EVENT_TIMEWAIT_EXIT event
+   - Fix for threaded-ctxdup mpich2 test
+   - Detecting spawn errors, patch contributed by
+     Dr. Bernd Kallies <kallies@zib.de>
+   - IMB-EXT fixes reported by Yutaka from Cray Japan
+   - Fix alltoall assertion error when limic is used
+
+MVAPICH2-1.4
+
+* Enhancements since mvapich2-1.4rc2
+    - Efficient runtime CPU binding
+    - Add an environment variable for controlling the use of multiple cq's for
+      iWARP interface.
+    - Add environmental variables to disable registration cache for All-to-All
+      on large systems.
+    - Performance tune for pt-to-pt Intra-node communication with LiMIC2
+    - Performance tune for MPI_Broadcast
+
+* Bug fixes since mvapich2-1.4rc2
+    - Fix the reading error in lock_get_response by adding
+      initialization to req->mrail.protocol
+    - Fix mpirun_rsh scalability issue with hierarchical ssh scheme
+      when launching greater than 8K processes.
+    - Add mvapich_ prefix to yacc functions. This can avoid some namespace
+      issues when linking with other libraries.  Thanks to Manhui Wang
+      <wangm9@cardiff.ac.uk> for contributing the patch.
+
+MVAPICH2-1.4-rc2
+
+* Enhancements since mvapich2-1.4rc1
+    - Added Feature: Check-point Restart with Fault-Tolerant Backplane Support
+      (FTB_CR)
+    - Added Feature: Multiple CQ-based design for Chelsio iWARP
+    - Distribute LiMIC2-0.5.2 with MVAPICH2. Added flexibility for selecting
+      and using a pre-existing installation of LiMIC2
+    - Increase the amount of command line that mpirun_rsh can handle (Thanks
+      for the suggestion by Bill Barth @ TACC)
+
+* Bug fixes since mvapich2-1.4rc1
+    - Fix for hang with packetized send using RDMA Fast path
+    - Fix for allowing to use user specified P_Key's (Thanks to Mike Heinz @
+      QLogic)
+    - Fix for allowing mpirun_rsh to accept parameters through the
+      parmeters file (Thanks to Mike Heinz @ QLogic)
+    - Modify the default value of shmem_bcast_leaders to 4K
+    - Fix for one-sided with XRC support
+    - Fix hang with XRC
+    - Fix to always enabling MVAPICH2_Sync_Checkpoint functionality
+    - Fix build error on RHEL 4 systems (Reported by Nathan Baca and Jonathan
+      Atencio)
+    - Fix issue with PGI compilation for PSM interface
+    - Fix for one-sided accumulate function with user-defined continguous
+      datatypes
+    - Fix linear/hierarchical switching logic and reduce threshold for the
+      enhanced mpirun_rsh framework.
+    - Clean up intra-node connection management code for iWARP
+    - Fix --enable-g=all issue with uDAPL interface
+    - Fix one sided operation with on demand CM.
+    - Fix VPATH build
+
+MVAPICH2-1.4-rc1
+
+* Bugs fixed since MVAPICH2-1.2p1
+
+  - Changed parameters for iWARP for increased scalability
+
+  - Fix error with derived datatypes and Put and Accumulate operations
+      Request was being marked complete before data transfer
+      had actually taken place when MV_RNDV_PROTOCOL=R3 was used
+
+  - Unregister stale memory registrations earlier to prevent
+    malloc failures
+
+  - Fix for compilation issues with --enable-g=mem and --enable-g=all
+
+  - Change dapl_prepost_noop_extra value from 5 to 8 to prevent
+    credit flow issues.
+
+  - Re-enable RGET (RDMA Read) functionality
+
+  - Fix SRQ Finalize error
+    Make sure that finalize does not hang when the srq_post_cond is
+    being waited on.
+
+  - Fix a multi-rail one-sided error when multiple QPs are used
+  
+  - PMI Lookup name failure with SLURM
+
+  - Port auto-detection failure when the 1st HCA did 
+    not have an active failure
+
+  - Change default small message scheduling for multirail
+    for higher performance
+ 
+  - MPE support for shared memory collectives now available
+
+MVAPICH2-1.2p1 (11/11/2008)
+
+* Changes since MVAPICH2-1.2
+
+  - Fix shared-memory communication issue for AMD Barcelona systems.
+
+MVAPICH2-1.2 (11/06/2008)
+
+* Bugs fixed since MVAPICH2-1.2-rc2
+
+  - Ignore the last bit of the pkey and remove the pkey_ix option since the
+    index can be different on different machines. Thanks for Pasha@Mellanox for
+    the patch.
+
+  - Fix data types for memory allocations. Thanks for Dr. Bill Barth from TACC
+    for the patches.
+
+  - Fix a bug when MV2_NUM_HCAS is larger than the number of active HCAs.
+
+  - Allow builds on architectures for which tuning parameters do not exist.
+
+* Changes related to the mpirun_rsh framework
+
+  - Always build and install mpirun_rsh in addition to the process manager(s)
+    selected through the --with-pm mechanism.
+
+  - Cleaner job abort handling
+
+  - Ability to detect the path to mpispawn if the Linux proc filesystem is
+    available.
+
+  - Added Totalview debugger support
+
+  - Stdin is only available to rank 0.  Other ranks get /dev/null.
+
+* Other miscellaneous changes
+
+  - Add sequence numbers for RPUT and RGET finish packets.
+
+  - Increase the number of allowed nodes for shared memory broadcast to 4K.
+
+  - Use /dev/shm on Linux as the default temporary file path for shared memory
+    communication. Thanks for Doug Johnson@OSC for the patch.
+
+  - MV2_DEFAULT_MAX_WQE has been replaced with MV2_DEFAULT_MAX_SEND_WQE and 
+    MV2_DEFAULT_MAX_RECV_WQE for send and recv wqes, respectively.
+
+  - Fix compilation warnings.
+
+MVAPICH2-1.2-RC2 (08/20/2008)
+
+* Following bugs are fixed in RC2
+
+  - Properly handle the scenario in shared memory broadcast code when the 
+    datatypes of different processes taking part in broadcast are different. 
+
+  - Fix a bug in Checkpoint-Restart code to determine whether a connection is a
+    shared memory connection or a network connection.
+
+  - Support non-standard path for BLCR header files.
+
+  - Increase the maximum heap size to avoid race condition in realloc().
+
+  - Use int32_t for rank for larger jobs with 32k processes or more.
+
+  - Improve mvapich2-1.2 bandwidth to the same level of mvapich2-1.0.3.
+
+  - An error handling patch for uDAPL interface. Thanks for Nilesh Awate for
+    the patch.
+
+  - Explicitly set some of the EP attributes when on demand connection is used
+    in uDAPL interface.
+
+MVAPICH2-1.2-RC1 (07/02/08)
+
+* Following features are added for this new mvapich2-1.2 release: 
+
+  - Based on MPICH2 1.0.7
+
+  - Scalable and robust daemon-less job startup
+
+       -- Enhanced and robust mpirun_rsh framework (non-MPD-based) to
+          provide scalable job launching on multi-thousand core clusters
+
+       -- Available for OpenFabrics (IB and iWARP) and uDAPL interfaces
+          (including Solaris)
+
+  - Adding support for intra-node shared memory communication with Checkpoint-restart
+
+       --  Allows best performance and scalability with fault-tolerance
+           support
+
+  - Enhancement to software installation
+
+       -- Change to full autoconf-based configuration
+       -- Adding an application (mpiname) for querying the MVAPICH2 library
+          version and configuration information
+
+  - Enhanced processor affinity using PLPA for multi-core architectures
+
+  - Allows user-defined flexible processor affinity
+
+  - Enhanced scalability for RDMA-based direct one-sided communication
+    with less communication resource
+
+  - Shared memory optimized MPI_Bcast operations
+
+  - Optimized and tuned MPI_Alltoall
+
+MVAPICH2-1.0.2 (02/20/08)
+
+* Change the default MV2_DAPL_PROVIDER to OpenIB-cma
+
+* Remove extraneous parameter is_blocking from the gen2 interface for
+  MPIDI_CH3I_MRAILI_Get_next_vbuf
+
+* Explicitly name unions in struct ibv_wr_descriptor and reference the
+  members in the code properly.
+
+* Change "inline" functions to "static inline" properly.
+
+* Increase the maximum number of buffer allocations for communication
+  intensive applications
+
+* Corrections for warnings from the Sun Studio 12 compiler.
+
+* If malloc hook initialization fails, then turn off registration
+  cache
+
+* Add MV_R3_THESHOLD and MV_R3_NOCACHE_THRESHOLD which allows
+  R3 to be used for smaller messages instead of registering the
+  buffer and using a zero-copy protocol.
+
+* Fixed an error in message coalescing.
+
+* Setting application initiated checkpoint as default if CR is turned on.
+
+
+MVAPICH2-1.0.1 (10/29/07)
+
+* Enhance udapl initializaton, set all ep_attr fields properly.
+  Thanks for Kanoj Sarcar from NetXen for the patch.
+
+* Fixing a bug that miscalculates the receive size in case of complex
+  datatype is used.
+  Thanks for Patrice Martinez from Bull for reporting this problem.
+
+ * Minor patches for fixing (i) NBO for rdma-cm ports and (ii) rank
+   variable usage in DEBUG_PRINT in rdma-cm.c
+   Thanks to Steve Wise for reporting these.
+
+
+MVAPICH2-1.0 (09/14/07)
+
+* Following features and bug fixes are added in this new MVAPICH2-1.0 release:
+
+- Message coalescing support to enable reduction of per Queue-pair
+  send queues for reduction in memory requirement on large scale
+  clusters. This design also increases the small message messaging
+  rate significantly. Available for Open Fabrics Gen2-IB.
+
+- Hot-Spot Avoidance Mechanism (HSAM) for alleviating
+  network congestion in large scale clusters. Available for
+  Open Fabrics Gen2-IB.
+
+- RDMA CM based on-demand connection management for large scale
+  clusters. Available for OpenFabrics Gen2-IB and Gen2-iWARP.
+
+- uDAPL on-demand connection management for large scale clusters.
+  Available for uDAPL interface (including Solaris IB implementation).
+
+- RDMA Read support for increased overlap of computation and
+  communication. Available for OpenFabrics Gen2-IB and Gen2-iWARP.
+
+- Application-initiated system-level (synchronous) checkpointing in
+  addition to the user-transparent checkpointing. User application can
+  now request a whole program checkpoint synchronously with BLCR by
+  calling special functions within the application. Available for
+  OpenFabrics Gen2-IB.
+
+- Network-Level fault tolerance with Automatic Path Migration (APM)
+  for tolerating intermittent network failures over InfiniBand.
+  Available for OpenFabrics Gen2-IB.
+
+- Integrated multi-rail communication support for OpenFabrics
+  Gen2-iWARP.
+
+- Blocking mode of communication progress. Available for OpenFabrics
+  Gen2-IB.
+
+- Based on MPICH2 1.0.5p4.
+
+
+* Fix for hang while using IMB with -multi option. 
+  Thanks to Pasha (Mellanox) for reporting this.
+
+* Fix for hang in memory allocations > 2^31 - 1.
+  Thanks to Bryan Putnam (Purdue) for reporting this.
+
+* Fix for RDMA_CM finalize rdma_destroy_id failure. 
+  Added Timeout env variable for RDMA_CM ARP. 
+  Thanks to Steve Wise for suggesting these.
+
+* Fix for RDMA_CM invalid event in finalize. Thanks to Steve Wise and Sean Hefty.
+
+* Fix for shmem memory collectives related memory leaks
+
+* Updated src/mpi/romio/adio/ad_panfs/Makefile.in include path to find mpi.h.
+  Contributed by David Gunter, Los Alamos National Laboratory.
+
+* Fixed header caching error on handling datatype messages with small vector 
+  sizes.
+
+* Change the finalization protocol for UD connection manager.
+
+* Fix for the "command line too long" problem. Contributed by Xavier Bru
+  <xavier.bru@bull.net> from Bull (http://www.bull.net/)
+
+* Change the CKPT handling to invalidate all unused registration cache.
+
+* Added ofed 1.2 interface change patch for iwarp/rdma_cm from Steve Wise.
+
+* Fix for rdma_cm_get_event err in finalize. Reported by Steve Wise.
+
+* Fix for when MV2_IBA_HCA is used. Contributed by Michael Schwind 
+  of Technical Univ. of Chemnitz (Germany).
+
+
+MVAPICH2-0.9.8 (11/10/06)
+
+* Following features are added in this new MVAPICH2-0.9.8 release:
+
+- BLCR based Checkpoint/Restart support
+
+- iWARP support: tested with Chelsio and Ammasso adapters and OpenFabrics/Gen2 stack
+
+- RDMA CM connection management support 
+
+- Shared memory optimizations for collective communication operations
+
+- uDAPL support for NetEffect 10GigE adapter.
+
+
+MVAPICH2-0.9.6 (10/22/06)
+
+* Following features and bug fixes are added in this new MVAPICH2-0.9.6 release:
+
+- Added on demand connection management.
+
+- Enhance shared memory communication support.
+
+- Added ptmalloc memory hook support.
+
+- Runtime selection for most configuration options.
+
+
+MVAPICH2-0.9.5 (08/30/06)
+
+* Following features and bug fixes are added in this new MVAPICH2-0.9.5 release:
+
+- Added multi-rail support for both point to point and direct one side
+  operations.
+
+- Added adaptive RDMA fast path.
+
+- Added shared receive queue support.
+
+- Added TotalView debugger support
+
+* Optimization of SMP startup information exchange for USE_MPD_RING to
+  enhance performance for SLURM. Thanks to Don and team members from Bull 
+  and folks from LLNL for their feedbacks and comments. 
+
+* Added uDAPL build script functionality to set DAPL_DEFAULT_PROVIDER
+  explicitly with default suggestions.
+
+* Thanks to Harvey Richardson from Sun for suggesting this feature.
+
+
+MVAPICH2-0.9.3 (05/20/06)
+
+* Following features are added in this new MVAPICH2-0.9.3 release:
+
+- Multi-threading support
+
+- Integrated with MPICH2 1.0.3 stack
+
+- Advanced AVL tree-based Resource-aware registration cache
+
+- Tuning and Optimization of various collective algorithms 
+
+- Processor affinity for intra-node shared memory communication
+
+- Auto-detection of InfiniBand adapters for Gen2 
+
+
+MVAPICH2-0.9.2 (01/15/06)
+
+* Following features are added in this new MVAPICH2-0.9.2 release:
+
+- InfiniBand support for OpenIB/Gen2
+
+- High-performance and optimized support for many MPI-2
+  functionalities (one-sided, collectives, datatype)
+
+- Support for other MPI-2 functionalities (as provided by MPICH2 1.0.2p1)
+
+- High-performance and optimized support for all MPI-1 functionalities 
+
+
+MVAPICH2-0.9.0 (11/01/05)
+
+* Following features are added in this new MVAPICH2-0.9.0 release:
+
+- Optimized two-sided operations with RDMA support
+
+- Efficient memory registration/de-registration schemes for RDMA operations
+
+- Optimized intra-node shared memory support (bus-based and NUMA)
+
+- Shared library support
+
+- ROMIO support
+
+- Support for multiple compilers (gcc, icc, and pgi)
+
+
+
+MVAPICH2-0.6.5 (07/02/05)
+
+* Following features are added in this new MVAPICH2-0.6.5 release:
+
+- uDAPL support (tested for InfiniBand, Myrinet, and Ammasso GigE)
+
+
+MVAPICH2-0.6.0 (11/04/04)
+
+* Following features are added in this new MVAPICH2-0.6.0 release:
+
+- MPI-2 functionalities (one-sided, collectives, datatype)
+
+- All MPI-1 functionalities
+
+- Optimized one-sided operations (Get, Put, and Accumulate)
+
+- Support for active and passive synchronization
+
+- Optimized two-sided operations
+
+- Scalable job start-up
+
+- Optimized and tuned for the above platforms and different
+  network interfaces (PCI-X and PCI-Express)
+
+- Memory efficient scaling modes for medium and large clusters

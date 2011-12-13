@@ -1,0 +1,82 @@
+# This Makefile.in created by simplemake.  Do not edit
+
+# @configure_input@
+
+# --------------------------------------------------------------------------
+all: all-redirect
+
+SHELL           = @SHELL@
+abs_builddir    = @abs_builddir@
+srcdir          = @srcdir@
+abs_srcdir      = @abs_srcdir@
+MAKE            = @MAKE@
+MPILIBNAME      = @MPILIBNAME@
+
+VPATH = .:@srcdir@
+
+.SUFFIXES:
+# Some make programs complain if no suffixes are set
+.SUFFIXES: .c .o
+apply: 
+	$(ACTION) $(ACTION_INPUT)
+	for dir in rdma @other_subdirs@ - ; do \
+		if [ "$$dir" = "-" ] ; then break ; fi ; \
+		(cd $$dir && ${MAKE} apply ) ; done
+clean: 
+	-@rm -f *.o ${srcdir}/*.o 
+	-@rm -f *.lo ${srcdir}/*.lo
+	for dir in rdma @other_subdirs@ - ; do \
+		if [ "$$dir" = "-" ] ; then break ; fi ; \
+		(cd $$dir && ${MAKE} clean ) ; done
+distclean:  clean distclean-xxx remove-makefile
+distclean-xxx:
+	for dir in rdma @other_subdirs@ - ; do \
+		if [ "$$dir" = "-" ] ; then break ; fi ; \
+		if [ ! -s $$dir/Makefile ] ; then continue ; fi ;\
+		(cd $$dir && ${MAKE} distclean ) ; done
+	-@rm -f Makefile
+	-@rm -rf autom4te*.cache
+	-@for dir in  hwloc gen2 udapl ; do \
+	    if [ -s $$dir/Makefile ] ; then \
+	      (cd $$dir && ${MAKE} distclean ;) ; fi ; \
+	done
+	-@rm -rf $(DEPS_DIR)
+	-@rm -f TAGS
+remove-makefile:
+	rm -f Makefile
+remove-genmakefiles:
+	rm -f  Makefile
+all-redirect:
+	@(cd rdma && ${MAKE} all )
+	@for dir in @other_subdirs@ - ; do \
+		if [ "$$dir" = "-" ] ; then break ; fi ; \
+		if ( cd $$dir && ${MAKE} all ) ; then : ; else exit 1; fi \
+	done
+	${MAKE} all-postamble
+
+# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+HEADERFILES     = $(HEADERS)
+SOURCEFILES     = $(SOURCES)
+# --------------------------------------------------------------------------
+# Copyright (c) 2003-2011, The Ohio State University. All rights
+# reserved.
+#
+# This file is part of the MVAPICH2 software package developed by the
+# team members of The Ohio State University's Network-Based Computing
+# Laboratory (NBCL), headed by Professor Dhabaleswar K. (DK) Panda.
+#
+# For detailed copyright and licensing information, please refer to the
+# copyright file COPYRIGHT in the top level MVAPICH2 directory.
+#
+
+
+all-postamble:
+	test "x@use_internal_hwloc@" = "xno" ||\
+            { ar crv @master_top_builddir@/lib/lib${MPILIBNAME}.a hwloc/src/*.o && ar crv @master_top_builddir@/lib/lib${MPILIBNAME}.la hwloc/src/.libs/*.o; }
+
+.POSIX:
+
+FORCE_TARGET:
+

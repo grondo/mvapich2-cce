@@ -1,0 +1,1 @@
+optinstall_PKGCONFIG = mvapich2-c.pc mvapich2-cxx.pc mvapich2-f77.pc mvapich2-f90.pc

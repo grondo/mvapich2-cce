@@ -1,0 +1,58 @@
+<dir>
+<file name="topology-hpux.c" info="1305048566"/>
+<file name="topology-x86.c" info="1315329100"/>
+<file name="traversal.c" info="1305048566"/>
+<file name="dolib.c" info="1305048566"/>
+<file name="topology-solaris.c" info="1315329100"/>
+<file name="topology-aix.c" info="1318017810"/>
+<file name="topology-linux.c" info="1318017810"/>
+<file name="topology-synthetic.c" info="1318017810"/>
+<file name="topology-xml.c" info="1318017810"/>
+<file name="distances.c" info="1318017810"/>
+<file name="topology-windows.c" info="1305048566"/>
+<file name="topology.c" info="1318017810"/>
+<file name="topology-darwin.c" info="1315329100"/>
+<file name="topology-osf.c" info="1305048566"/>
+<file name="cpuset.c" info="1305048566"/>
+<file name="misc.c" info="1305048566"/>
+<file name="topology-freebsd.c" info="1305048566"/>
+<file name="bind.c" info="1305048566"/>
+</dir>
+<data>
+<fileinfo name="topology-hpux.c">
+</fileinfo>
+<fileinfo name="topology-x86.c">
+</fileinfo>
+<fileinfo name="traversal.c">
+</fileinfo>
+<fileinfo name="dolib.c">
+</fileinfo>
+<fileinfo name="topology-solaris.c">
+</fileinfo>
+<fileinfo name="topology-aix.c">
+</fileinfo>
+<fileinfo name="topology-linux.c">
+</fileinfo>
+<fileinfo name="topology-synthetic.c">
+</fileinfo>
+<fileinfo name="topology-xml.c">
+</fileinfo>
+<fileinfo name="distances.c">
+</fileinfo>
+<fileinfo name="topology-windows.c">
+</fileinfo>
+<fileinfo name="topology.c">
+</fileinfo>
+<fileinfo name="topology-darwin.c">
+</fileinfo>
+<fileinfo name="topology-osf.c">
+</fileinfo>
+<fileinfo name="cpuset.c">
+</fileinfo>
+<fileinfo name="misc.c">
+</fileinfo>
+<fileinfo name="topology-freebsd.c">
+</fileinfo>
+<fileinfo name="bind.c">
+</fileinfo>
+</data>

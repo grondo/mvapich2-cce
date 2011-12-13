@@ -1,0 +1,49 @@
+<dir>
+<file name="misc.h" info="1318017810"/>
+<file name="lstopo.h" info="1305048566"/>
+<file name="hwloc-calc.c" info="1318017810"/>
+<file name="lstopo-xml.c" info="1305048566"/>
+<file name="hwloc-distrib.c" info="1318017810"/>
+<file name="lstopo-cairo.c" info="1305048566"/>
+<file name="lstopo-fig.c" info="1305048566"/>
+<file name="lstopo.c" info="1318017810"/>
+<file name="lstopo-color.c" info="1305048566"/>
+<file name="hwloc-ps.c" info="1315329100"/>
+<file name="hwloc-bind.c" info="1305048566"/>
+<file name="lstopo-windows.c" info="1305048566"/>
+<file name="lstopo-draw.c" info="1305048566"/>
+<file name="hwloc-calc.h" info="1315329100"/>
+<file name="lstopo-text.c" info="1315329100"/>
+</dir>
+<data>
+<fileinfo name="misc.h">
+</fileinfo>
+<fileinfo name="lstopo.h">
+</fileinfo>
+<fileinfo name="hwloc-calc.c">
+</fileinfo>
+<fileinfo name="lstopo-xml.c">
+</fileinfo>
+<fileinfo name="hwloc-distrib.c">
+</fileinfo>
+<fileinfo name="lstopo-cairo.c">
+</fileinfo>
+<fileinfo name="lstopo-fig.c">
+</fileinfo>
+<fileinfo name="lstopo.c">
+</fileinfo>
+<fileinfo name="lstopo-color.c">
+</fileinfo>
+<fileinfo name="hwloc-ps.c">
+</fileinfo>
+<fileinfo name="hwloc-bind.c">
+</fileinfo>
+<fileinfo name="lstopo-windows.c">
+</fileinfo>
+<fileinfo name="lstopo-draw.c">
+</fileinfo>
+<fileinfo name="hwloc-calc.h">
+</fileinfo>
+<fileinfo name="lstopo-text.c">
+</fileinfo>
+</data>

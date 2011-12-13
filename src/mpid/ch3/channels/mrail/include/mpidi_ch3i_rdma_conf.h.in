@@ -1,0 +1,194 @@
+/* include/mpidi_ch3i_rdma_conf.h.in.  Generated from configure.in by autoheader.  */
+
+/* -*- Mode: C; c-basic-offset:4 ; -*- */
+/* Copyright (c) 2003-2011, The Ohio State University. All rights
+ * reserved.
+ *
+ * This file is part of the MVAPICH2 software package developed by the
+ * team members of The Ohio State University's Network-Based Computing
+ * Laboratory (NBCL), headed by Professor Dhabaleswar K. (DK) Panda.
+ *
+ * For detailed copyright and licensing information, please refer to the
+ * copyright file COPYRIGHT in the top level MVAPICH2 directory.
+ *
+ */
+#if !defined(MPIDI_CH3I_RDMA_CONF_H_INCLUDED)
+#define MPIDI_CH3I_RDMA_CONF_H_INCLUDED
+
+
+/* Define to enable Checkpoint/Restart support. */
+#undef CKPT
+
+/* Define to enable FTB-CR support. */
+#undef CR_FTB
+
+/* Define to provide a default dapl provider (required). */
+#undef DAPL_DEFAULT_PROVIDER
+
+/* Define to specify the dat header file to include. */
+#undef DAT_HEADER
+
+/* Define to disable use of ptmalloc. On Linux, disabling ptmalloc also
+   disables registration caching. */
+#undef DISABLE_PTMALLOC
+
+/* Define to enable 3D Torus support */
+#undef ENABLE_3DTORUS_SUPPORT
+
+/* Define to 1 if you have the <errno.h> header file. */
+#undef HAVE_ERRNO_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define if hwloc library is available */
+#undef HAVE_LIBHWLOC
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `mmap' function. */
+#undef HAVE_MMAP
+
+/* Define to 1 if you have the `munmap' function. */
+#undef HAVE_MUNMAP
+
+/* Define to 1 if you have the <numaif.h> header file. */
+#undef HAVE_NUMAIF_H
+
+/* Define to 1 if you have the <pthread.h> header file. */
+#undef HAVE_PTHREAD_H
+
+/* Define to 1 if you have the `shmat' function. */
+#undef HAVE_SHMAT
+
+/* Define to 1 if you have the `shmctl' function. */
+#undef HAVE_SHMCTL
+
+/* Define to 1 if you have the `shmdt' function. */
+#undef HAVE_SHMDT
+
+/* Define to 1 if you have the `shmget' function. */
+#undef HAVE_SHMGET
+
+/* Define to 1 if you have the `snprintf' function. */
+#undef HAVE_SNPRINTF
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strtoll' function. */
+#undef HAVE_STRTOLL
+
+/* Define to 1 if you have the `syscall' function. */
+#undef HAVE_SYSCALL
+
+/* Define to 1 if you have the <syscall.h> header file. */
+#undef HAVE_SYSCALL_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/syscall.h> header file. */
+#undef HAVE_SYS_SYSCALL_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to disable header caching. */
+#undef MV2_DISABLE_HEADER_CACHING
+
+/* Define if snprintf needs a declaration */
+#undef NEEDS_SNPRINTF_DECL
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define to enable support from RDMA CM. */
+#undef RDMA_CM
+
+/* Define to specify the build OS type. */
+#undef SOLARIS
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Define if we have sysv shared memory */
+#undef USE_MMAP_SHM
+
+/* Define if we have sysv shared memory */
+#undef USE_SYSV_SHM
+
+/* Define to specify the build CPU is an AMD quad core. */
+#undef _AMD_QUAD_CORE_
+
+/* Define to specify the link speed. */
+#undef _DDR_
+
+/* Define to specify the build CPU type. */
+#undef _EM64T_
+
+/* Define to use XRC */
+#undef _ENABLE_XRC_
+
+/* Define to specify the build CPU type. */
+#undef _IA32_
+
+/* Define to specify the build CPU type. */
+#undef _IA64_
+
+/* Define to utilize GEN2 settings for UDAPL. */
+#undef _IB_GEN2_
+
+/* Define to specify the size of the cluster. */
+#undef _LARGE_CLUSTER
+
+/* Define to specify the size of the cluster. */
+#undef _MEDIUM_CLUSTER
+
+/* Define to specify the i/o bus type. */
+#undef _PCI_EX_
+
+/* Define to specify the i/o bus type. */
+#undef _PCI_X_
+
+/* Define to specify the link speed. */
+#undef _SDR_
+
+/* Define to specify the size of the cluster. */
+#undef _SMALL_CLUSTER
+
+/* Define when using LiMIC2 */
+#undef _SMP_LIMIC_
+
+/* Define to specify the build CPU type. */
+#undef _X86_64_
+
+#endif /* !defined(MPIDI_CH3I_RDMA_CONF_H_INCLUDED) */

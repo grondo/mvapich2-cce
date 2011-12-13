@@ -1,0 +1,10 @@
+INCLUDES = -I. -I../../include -I../../../../../../../include -I@master_top_srcdir@/src/ch3/channels/nemesis/nemesis/include -I@master_top_srcdir@/src/include -I@top_builddir@/src/include -I@master_top_srcdir@/src/mpid/ch3/channels/common/include -I@master_top_srcdir@/src/mpid/ch3/channels/mrail/src/gen2
+VPATH = .:@srcdir@:@master_top_srcdir@/src/mpid/ch3/channels/common/src/reg_cache:@master_top_srcdir@/src/mpid/ch3/channels/common/src/memory:@master_top_srcdir@/src/mpid/ch3/channels/common/src/memory/ptmalloc2:@master_top_srcdir@/src/mpid/ch3/channels/common/src/util:@master_top_srcdir@/src/mpid/ch3/channels/common/src/qos:@master_top_srcdir@/src/mpid/ch3/channels/common/src/detect/hca:@master_top_srcdir@/src/mpid/ch3/channels/common/src/detect/arch
+DEFS = -DHAVE_CONFIG_H -I. -I@srcdir@ -DNEMESIS_BUILD
+lib${MPILIBNAME}_a_SOURCES = \
+  ib_init.c ib_ckpt_shutdown.c ib_connect_to_root.c ib_finalize.c ib_init.c \
+  ib_poll.c ib_vc.c ib_send.c ib_param.c ib_cm.c ib_cell.c \
+  ib_hca.c ib_process.c ib_vbuf.c ib_channel_manager.c ib_recv.c ib_srq.c \
+  ib_ds_hash.c ib_ds_queue.c ib_errors.c ib_rdma.c ib_lmt_recv.c ib_lmt_send.c \
+  dreg.c avl.c mem_hooks.c mvapich_malloc.c mv2_utils.c rdma_3dtorus.c \
+  mv2_arch_detect.c mv2_hca_detect.c

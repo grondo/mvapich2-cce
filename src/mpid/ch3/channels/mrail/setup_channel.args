@@ -1,0 +1,59 @@
+for arg in $ac_configure_args; do
+  case $arg in
+    \'--with-rdma=*)
+        with_rdma=`echo $arg | sed -e 's/--with-rdma=//' -e "s/'//g"`
+    ;;
+  esac
+done
+
+if test -z "$with_rdma" -o "$with_rdma" = "default"; then
+    if test -n "`echo $build_os | grep solaris`"; then
+        with_rdma=udapl
+    else
+        with_rdma=gen2
+    fi 
+fi
+
+case $with_rdma in
+    gen2)
+        for arg in $ac_configure_args; do
+            case $arg in
+                \'--with-blcr-include=*)
+                    with_blcr_include=`echo $arg | sed -e 's/--with-blcr-include=//' -e "s/'//g"`
+
+                    if test -n "$with_blcr_include"; then
+                        CPPFLAGS="-I${with_blcr_include} $CPPFLAGS"
+                    fi
+                ;;
+                \'--with-ib-include=*)
+                    with_ib_include=`echo $arg | sed -e 's/--with-ib-include=//' -e "s/'//g"`
+                ;;
+            esac
+        done
+
+        if test -z "$with_ib_include"; then
+            ibdir=/usr/local/ofed/include
+
+            if test -d $ibdir; then
+                with_ib_include=$ibdir
+            fi
+        fi
+
+        if test -n "$with_ib_include"; then
+            CPPFLAGS="-I${with_ib_include} $CPPFLAGS"
+        fi
+    ;;
+    udapl)
+        for arg in $ac_configure_args; do
+            case $arg in
+                \'--with-dapl-include=*)
+                    with_dapl_include=`echo $arg | sed -e 's/--with-dapl-include=//' -e "s/'//g"`
+
+                    if test -n "$with_dapl_include"; then
+                        CPPFLAGS="-I${with_dapl_include} $CPPFLAGS"
+                    fi
+                ;;
+            esac
+        done
+    ;;
+esac

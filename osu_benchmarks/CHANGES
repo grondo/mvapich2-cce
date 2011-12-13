@@ -1,0 +1,16 @@
+OSU Micro Benchmarks v3.4 (09/12/11)
+* New Features & Enhancments
+    - Update one-sided communication benchmarks to provide shared memory hint
+      in MPI_Alloc_mem calls
+    - Add passive one-sided communication benchmarks
+    - Give default values to configure definitions (can now build directly with
+      mpicc)
+    - Update latency benchmarks to begin from 0 byte message
+    - Update one-sided communication benchmarks to use MPI_Alloc_mem for buffer
+      allocation
+* Bug Fixes
+    - Remove memory leaks in one-sided communication benchmarks
+    - Update benchmarks to touch buffers before using them for communication
+    - Fix osu_get_bw test to use different buffers for concurrent communication
+      operations
+    - Fix several compilation warnings

@@ -1,0 +1,90 @@
+<dir>
+<file name="udapl_arch.h" info="1301023350"/>
+<file name="udapl_param.c" info="1315604666"/>
+<file name="udapl_rndv.c" info="1301023350"/>
+<file name="udapl_send.c" info="1302574911"/>
+<file name="udapl_rma.c" info="1301023350"/>
+<file name="vbuf.h" info="1301023350"/>
+<file name="mpidi_ch3_rdma_pre.h" info="1312325880"/>
+<file name="dreg.h" info="1301023350"/>
+<file name="rdma_impl.h" info="1306132235"/>
+<file name="vbuf.c" info="1301023350"/>
+<file name="udapl_priv.h" info="1301023350"/>
+<file name="avl_typs.h" info="1301023350"/>
+<file name="udapl_param.h" info="1315604666"/>
+<file name="udapl_util.h" info="1301023350"/>
+<file name="rdma_udapl_init.c" info="1301023350"/>
+<file name="dreg.c" info="1301023350"/>
+<file name="udapl_recv.c" info="1302574911"/>
+<file name="udapl_channel_manager.c" info="1302574911"/>
+<file name="udapl_header.h" info="1301023350"/>
+<file name="avl.h" info="1301023350"/>
+<file name="mpidi_ch3_rdma_post.h" info="1301023350"/>
+<file name="rdma_udapl_priv.c" info="1301023350"/>
+<file name="rdma_udapl_1sc.c" info="1316545108"/>
+<file name="avl.c" info="1301023350"/>
+</dir>
+<data>
+<fileinfo name="udapl_arch.h">
+</fileinfo>
+<fileinfo name="udapl_param.c">
+</fileinfo>
+<fileinfo name="udapl_rndv.c">
+</fileinfo>
+<fileinfo name="udapl_send.c">
+MRAILI_EXT_SENDQ_ENQUEUE MRAILI_Ext_sendq_enqueue
+MRAILI_EXT_SENDQ_SEND MRAILI_Ext_sendq_send
+MPIDI_CH3I_MRAILI_FAST_RDMA_FILL_START_BUF MPIDI_CH3I_MRAILI_Fast_rdma_fill_start_buf
+MPIDI_CH3I_MRAILI_FAST_RDMA_SEND_COMPLETE MPIDI_CH3I_MRAILI_Fast_rdma_send_complete
+MPIDI_CH3I_MRAILI_FAST_RDMA_OK MPIDI_CH3I_MRAILI_Fast_rdma_ok
+MRAILI_POST_SEND MRAILI_Post_send
+MRAILI_FILL_START_BUFFER MRAILI_Fill_start_buffer
+MPIDI_CH3I_MRAILI_EAGER_SEND MPIDI_CH3I_MRAILI_Eager_send
+MRAILI_BACKLOG_SEND MRAILI_Backlog_send
+MRAILI_PROCESS_SEND MRAILI_Process_send
+MRAILI_SEND_NOOP MRAILI_Send_noop
+MRAILI_SEND_NOOP_IF_NEEDED MRAILI_Send_noop_if_needed
+MRAILI_RDMA_PUT MRAILI_RDMA_Put
+</fileinfo>
+<fileinfo name="udapl_rma.c">
+</fileinfo>
+<fileinfo name="vbuf.h">
+</fileinfo>
+<fileinfo name="mpidi_ch3_rdma_pre.h">
+</fileinfo>
+<fileinfo name="dreg.h">
+</fileinfo>
+<fileinfo name="rdma_impl.h">
+</fileinfo>
+<fileinfo name="vbuf.c">
+</fileinfo>
+<fileinfo name="udapl_priv.h">
+</fileinfo>
+<fileinfo name="avl_typs.h">
+</fileinfo>
+<fileinfo name="udapl_param.h">
+</fileinfo>
+<fileinfo name="udapl_util.h">
+</fileinfo>
+<fileinfo name="rdma_udapl_init.c">
+</fileinfo>
+<fileinfo name="dreg.c">
+</fileinfo>
+<fileinfo name="udapl_recv.c">
+</fileinfo>
+<fileinfo name="udapl_channel_manager.c">
+</fileinfo>
+<fileinfo name="udapl_header.h">
+</fileinfo>
+<fileinfo name="avl.h">
+</fileinfo>
+<fileinfo name="mpidi_ch3_rdma_post.h">
+</fileinfo>
+<fileinfo name="rdma_udapl_priv.c">
+</fileinfo>
+<fileinfo name="rdma_udapl_1sc.c">
+MPID_STATE_MPIDI_CH3I_RDMA_POST MPIDI_CH3I_RDMA_post
+</fileinfo>
+<fileinfo name="avl.c">
+</fileinfo>
+</data>

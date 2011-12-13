@@ -1,0 +1,44 @@
+# Copyright (c) 2003-2011, The Ohio State University. All rights
+# reserved.
+#
+# This file is part of the MVAPICH2 software package developed by the
+# team members of The Ohio State University's Network-Based Computing
+# Laboratory (NBCL), headed by Professor Dhabaleswar K. (DK) Panda.
+#
+# For detailed copyright and licensing information, please refer to the
+# copyright file COPYRIGHT in the top level MVAPICH2 directory.
+
+SUBDIRS = .
+CFLAGS = @CFLAGS@ -D_GNU_SOURCE
+INCLUDES= -I@master_top_srcdir@/src/include -I../../../../../../include -I@master_top_srcdir@/src/mpid/ch3/channels/mrail/include/memory -I@master_top_srcdir@/src/mpid/ch3/channels/common/include
+VPATH = .:@srcdir@:@master_top_srcdir@/src/mpid/ch3/channels/common/src/memory:@master_top_srcdir@/src/mpid/ch3/channels/common/src/reg_cache:@master_top_srcdir@/src/mpid/ch3/channels/common/src/rdma_cm:@master_top_srcdir@/src/mpid/ch3/channels/common/src/detect/hca:@master_top_srcdir@/src/mpid/ch3/channels/common/src/detect/arch:@master_top_srcdir@/src/mpid/ch3/channels/common/src/memory/ptmalloc2:@master_top_srcdir@/src/mpid/ch3/channels/common/src/util/:@master_top_srcdir@/src/mpid/ch3/channels/common/src/qos:@master_top_srcdir@/src/mpid/ch3/channels/common/src/ud-hybrid
+
+lib${MPILIBNAME}_a_SOURCES = \
+ibv_send.c \
+ibv_recv.c \
+ibv_ud.c \
+ibv_ud_zcopy.c \
+rdma_iba_init.c \
+rdma_iba_priv.c \
+dreg.c \
+ibv_param.c \
+vbuf.c \
+ibv_channel_manager.c \
+ibv_rma.c \
+rdma_iba_1sc.c \
+ibv_rndv.c \
+ibv_priv.c \
+avl.c \
+cm.c \
+rdma_cm.c \
+cr.c \
+crc32h.c \
+ring_startup.c \
+sysreport.c \
+mv2_arch_detect.c \
+mv2_hca_detect.c \
+mem_hooks.c \
+mvapich_malloc.c \
+mv2_utils.c \
+mv2_ud_init.c \
+rdma_3dtorus.c

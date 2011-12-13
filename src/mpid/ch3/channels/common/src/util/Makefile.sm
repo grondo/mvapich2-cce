@@ -1,0 +1,8 @@
+INCLUDES = -I${master_top_srcdir}/src/mpid/ch3/channels/common/include
+
+lib${MPILIBNAME}_a_SOURCES =	\
+    crc32h.c			\
+    mv2_config.c		\
+    error_handling.c	\
+    debug_utils.c		\
+    mv2_clock.c

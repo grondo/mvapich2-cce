@@ -1,0 +1,17 @@
+**activeports:Insufficient ports in active state.
+**activeports %d:Insufficient ports in active state, need %d.
+**ibv_get_device_name:ibv_get_device_name failed.
+**onesidedcomps:Invalid one sided completion.
+**portquery:Query of port failed or port is not active.
+**portquery %d:Query of port %d failed or port is not active.
+**rdmacmmaxport:MV2_RDMA_CM_MAX_PORT out of range.
+**rdmacmmaxport %d %d %d:MV2_RDMA_CM_MAX_PORT value of %d is out of range (%d - %d).
+**rdmacmminport:MV2_RDMA_CM_MIN_PORT out of range.
+**rdmacmminport %d %d %d:MV2_RDMA_CM_MIN_PORT value of %d is out of range (%d - %d).
+**rdmacminvalidport:Invalid port number.
+**rdmacminvalidport %d:Invalid port number (%d).
+**rdmacmportrange:Invalid port range.
+**rdmacmportrange %d %d:Invalid port range of %d. The required range is %d.
+**umadgetca:Unable to get InfiniBand device port attributes.
+**umadgetrate:Unable to get InfiniBand device Rate.
+**umadinit:UMAD initialization failed.

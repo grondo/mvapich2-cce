@@ -1,0 +1,5 @@
+#! /bin/sh
+export LD_LIBRARY_PATH=@nem_ib_ld_library_path@:$LD_LIBRARY_PATH 
+FFLAGS="$FFLAGS @nem_ib_fflags@"
+LDFLAGS="$LDFLAGS @nem_ib_ldflags@"
+LIBS="$LIBS @nem_ib_libs@"

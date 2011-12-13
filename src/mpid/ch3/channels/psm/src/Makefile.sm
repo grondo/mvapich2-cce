@@ -1,0 +1,19 @@
+INCLUDES = -I../../../../../include -I${master_top_srcdir}/src/include
+socksources = \
+    mpidi_calls.c           \
+    psm_entry.c             \
+    psm_exit.c              \
+    psm_istart.c            \
+    psm_send.c              \
+    psm_recv.c              \
+    psm_queue.c             \
+    psm_1sided.c            \
+	psm_comm.c              \
+    psm_vbuf.c
+
+lib${MPILIBNAME}_a_SOURCES = ${socksources}
+
+EXTRA_LIBS = libmpich2-ch3-sock.a
+libmpich2-ch3-sock_a_SOURCES = ${socksources}
+
+

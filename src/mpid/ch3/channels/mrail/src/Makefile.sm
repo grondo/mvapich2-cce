@@ -1,0 +1,18 @@
+# Copyright (c) 2003-2011, The Ohio State University. All rights
+# reserved.
+#
+# This file is part of the MVAPICH2 software package developed by the
+# team members of The Ohio State University's Network-Based Computing
+# Laboratory (NBCL), headed by Professor Dhabaleswar K. (DK) Panda.
+#
+# For detailed copyright and licensing information, please refer to the
+# copyright file COPYRIGHT in the top level MVAPICH2 directory.
+#
+
+SUBDIRS_other_subdirs = hwloc gen2 udapl
+SUBDIRS = rdma @other_subdirs@
+NOTSIMPLEMAKE_SUBDIRS = hwloc
+
+all-postamble:
+	test "x@use_internal_hwloc@" = "xno" ||\
+            { ar crv @master_top_builddir@/lib/lib${MPILIBNAME}.a hwloc/src/*.o && ar crv @master_top_builddir@/lib/lib${MPILIBNAME}.la hwloc/src/.libs/*.o; }

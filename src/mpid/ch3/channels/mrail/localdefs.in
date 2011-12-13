@@ -1,0 +1,5 @@
+#! /bin/sh
+export LD_LIBRARY_PATH=@mrail_ld_library_path@:$LD_LIBRARY_PATH 
+FFLAGS="$FFLAGS @mrail_fflags@"
+LDFLAGS="$LDFLAGS @mrail_ldflags@"
+LIBS="$LIBS @mrail_libs@"

@@ -1,0 +1,39 @@
+# Copyright (c) 2003-2011, The Ohio State University. All rights
+# reserved.
+#
+# This file is part of the MVAPICH2 software package developed by the
+# team members of The Ohio State University's Network-Based Computing
+# Laboratory (NBCL), headed by Professor Dhabaleswar K. (DK) Panda.
+#
+# For detailed copyright and licensing information, please refer to the
+# copyright file COPYRIGHT in the top level MVAPICH2 directory.
+
+CFLAGS=@CFLAGS@ -D_GNU_SOURCE
+
+INCLUDES= -I@master_top_srcdir@/src/include -I../../../../../../include -I@master_top_srcdir@/src/mpid/ch3/channels/common/include
+
+lib${MPILIBNAME}_a_SOURCES = \
+mpid_mrail_rndv.c \
+ch3_finalize.c \
+ch3_init.c \
+ch3_isend.c \
+ch3_isendv.c \
+ch3_istartmsg.c \
+ch3_istartmsgv.c \
+ch3_request.c \
+ch3_progress.c \
+ch3_cancel_send.c \
+ch3_read_progress.c \
+ch3_comm_spawn_multiple.c \
+ch3_comm_accept.c \
+ch3_comm_connect.c \
+ch3_open_port.c \
+ch3_abort.c \
+ch3_istartrndvmsg.c \
+ch3_packetizedtransfer.c \
+ch3_rndvtransfer.c \
+ch3_smp_progress.c \
+ch3_get_business_card.c \
+ch3_hwloc_bind.c \
+ch3i_comm.c \
+ch3_contigsend.c

@@ -1,0 +1,31 @@
+<dir>
+<file name="thread.h" info="1305048566"/>
+<file name="rset.h" info="1305048566"/>
+<file name="processor.h" info="1305048566"/>
+<file name="cpuset.h" info="1301023350"/>
+<file name="systemcfg.h" info="1305048566"/>
+<file name="mpctl.h" info="1305048566"/>
+<file name="lgrp_user.h" info="1305048566"/>
+<file name="procset.h" info="1305048566"/>
+<file name="sysctl.h" info="1305048566"/>
+</dir>
+<data>
+<fileinfo name="thread.h">
+</fileinfo>
+<fileinfo name="rset.h">
+</fileinfo>
+<fileinfo name="processor.h">
+</fileinfo>
+<fileinfo name="cpuset.h">
+</fileinfo>
+<fileinfo name="systemcfg.h">
+</fileinfo>
+<fileinfo name="mpctl.h">
+</fileinfo>
+<fileinfo name="lgrp_user.h">
+</fileinfo>
+<fileinfo name="procset.h">
+</fileinfo>
+<fileinfo name="sysctl.h">
+</fileinfo>
+</data>
