@@ -1,3 +1,6 @@
+Version 1.7.0-13chaos:
+ - Fix 3rd party compiler builds for /opt.
+
 Version 1.7.0-12chaos:
  - Repackage cce version for chaos /opt
  - Disable PMGR_COLLECTIVE and use SLURM PMI instead
