@@ -332,7 +332,7 @@ all-postamble:
 	@if [ "@BUILD_TVDLL@" = "yes" ] ; then \
 	( cd src/mpi/debugger && $(MAKE) ./libtvmpich2.@SHLIB_EXT@ ) ; fi
 	@if [ -s lib/pkglist.new ] ; then mv -f lib/pkglist.new lib/pkglist ; fi
-	( { test -d osu_benchmarks || mkdir osu_benchmarks; } && cd osu_benchmarks && $(master_top_srcdir)/osu_benchmarks/configure --prefix=@prefix@ CC=../bin/mpicc CPPFLAGS='-I ../include' LDFLAGS='-L ../lib -Wl,-rpath=@prefix@/lib' && $(MAKE) )
+	( { test -d osu_benchmarks || mkdir osu_benchmarks; } && cd osu_benchmarks && $(master_top_srcdir)/osu_benchmarks/configure --prefix=@prefix@ CC=../bin/mpicc CPPFLAGS='-I ../include' LDFLAGS='-L ../lib -Wl,-rpath=@prefix@/lib' LD_LIBRARY_PATH="$$LD_LIBRARY_PATH:../lib" && $(MAKE) )
 	@echo "Make completed"
 
 # The test on lib/.mpich2created lets us delete the local lib directory
