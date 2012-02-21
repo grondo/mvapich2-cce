@@ -1,0 +1,6 @@
+ Name:         mvapich2-1.7-gnu
+ Base_Version: 1.7
+ Version:      1.7.0
+ Release:      12chaos
+ Author:       The Ohio State University <mvapich-discuss@cse.ohio-state.edu>
+ Pre_Exec:     find . -type f -name mpich*.spec -exec rm {} \;

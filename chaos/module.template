@@ -1,0 +1,26 @@
+#%Module1.0
+# vi:set filetype=tcl:
+#
+
+# module path
+# /opt/modules/modulefiles/__NAME__-__COMPILER__-__DEVICE__/__VERSION__
+
+__PREREQ__
+
+
+# global control file
+if { [file exists $env(MODULESHOME)/etc/control] } {
+   source $env(MODULESHOME)/etc/control
+}
+
+# local variables
+set name    __NAME__
+set version __VERSION__
+set vendor  __COMPILER__
+set device  __DEVICE__
+set tool    mpi
+set prefix  /opt/$name-$vendor-$device-$version
+set libdir  $prefix/lib/shared
+set template  /opt/modules/templates/$tool
+	                                    
+source $template

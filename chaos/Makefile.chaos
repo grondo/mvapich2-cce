@@ -1,0 +1,251 @@
+#
+# $Id: Makefile 59 2006-08-17 22:29:30Z grondo $
+#
+#
+
+#
+#  Variants of mvapich to build and compilers with which
+#   to build those variants.  #
+VARIANTS  ?= ofa shmem psm
+COMPILERS ?= gnu gnu-debug
+
+LONG_PATH_HACK   ?= 0 # Set to 1 if you need a longer path for debugedit
+
+# Set NESTED_INSTALL to 0 if you want bin/ lib/ etc.. directly
+#  under MVAPICH_PREFIX
+NESTED_INSTALL   ?= 1
+
+TOP_SRC_DIR      := $(shell /bin/pwd)
+#HCA_COMPILE_FLAG ?= _MLX_PCI_EX_DDR_
+ARCH_NAME        := $(shell uname -m | tr 'a-z' 'A-Z' | sed 's/.86$$/IA32/')
+ARCH_NAME        := -D_$(ARCH_NAME)_
+#IBHOME           := /usr
+#IBHOME_LIB       := /usr/lib64
+#OPEN_IB_HOME     := /usr
+#OPEN_IB_HOME_LIB := /usr/lib64
+MVAPICH_PREFIX   ?= /usr/lib64/mvapich2
+MVAPICH_DESTDIR  ?= $(TOP_SRC_DIR)/root
+MAKE             := /usr/bin/make
+
+COMPAT           := AUTO_DETECT
+
+ifeq ($(LONG_PATH_HACK), 1)
+  BUILDDIR       := BUILD/build-mvapich2-long-path-hack-enabled
+else
+  BUILDDIR       := BUILD/build
+endif
+
+ifeq ($(NESTED_INSTALL), 1)
+  PREFIXDIR      = $(MVAPICH_PREFIX)/$(CNAME)/$$variant
+else
+  PREFIXDIR      = $(MVAPICH_PREFIX)
+endif
+
+#########################
+# MORE MVAPICH CONFIGURE FLAGS
+#########################
+
+# turn off optimization so that memory debuggers work
+# can turn this back on if performance drops significantly
+#PTMALLOC        := no
+RDMA_CM_SUPPORT := no
+ROMIO           := yes
+SHARED_LIBS     := yes
+
+#REG_CACHE := --enable-registration-cache
+REG_CACHE := --disable-registration-cache
+
+# PROBLEMS:
+# as of 2009-10-09:
+#    --enable-g=memcheck leads to seg fault (included in --enable-g=all), use --enable-g=dbg instead
+#    intel-debug: CONFIG_FLAGS := --enable-fast=O0 --enable-g=all --enable-error-checking=all --enable-error-messages=all --enable-nmpi-as-mpi
+
+# as of 2009-12-01
+# we'll specify the compiler flags to be used via other means,
+# so set CFLAGS="" since otherwise it assumes some default which conflicts with our desired settings
+# have to do this just for the mvapich configure and make (setting it for the whole makefile breaks other things)
+
+gn%: CC      := gcc 
+gn%: CXX     := g++ 
+gn%: F77     := gfortran
+gn%: FC      := gfortran
+gn%: SED_ARG := s|/gnu/|/gnu-debug/|
+gnu-debug: CNAME              := gnu-debug
+gnu-debug: MPICH2LIB_CFLAGS   := -g -O0
+gnu-debug: MPICH2LIB_CXXFLAGS := -g -O0
+gnu-debug: MPICH2LIB_FFLAGS   := -g -O0 -fno-second-underscore
+gnu-debug: MPICH2LIB_FCFLAGS  := -g -O0 -fno-second-underscore
+gnu-debug: CONFIG_FLAGS       := --disable-fast --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+gnu: CNAME              := gnu
+gnu: MPICH2LIB_CFLAGS   := -g -O2
+gnu: MPICH2LIB_CXXFLAGS := -g -O2
+gnu: MPICH2LIB_FFLAGS   := -g -O2 -fno-second-underscore
+gnu: MPICH2LIB_FCFLAGS  := -g -O2 -fno-second-underscore
+gnu: CONFIG_FLAGS       := --enable-fast=O2 --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+gnu-opt: CNAME              := gnu-opt
+gnu-opt: MPICH2LIB_CFLAGS   := -O3
+gnu-opt: MPICH2LIB_CXXFLAGS := -O3
+gnu-opt: MPICH2LIB_FFLAGS   := -O3 -fno-second-underscore
+gnu-opt: MPICH2LIB_FCFLAGS  := -O3 -fno-second-underscore
+gnu-opt: CONFIG_FLAGS       := --enable-fast=O3,nochkmsg,notiming --enable-g=none --enable-nmpi-as-mpi
+
+inte%: CC      := icc
+inte%: CXX     := icpc
+inte%: F77     := ifort
+inte%: FC      := ifort
+inte%: SED_ARG := s|/intel/|/intel-debug/|
+intel-debug: CNAME              := intel-debug
+intel-debug: MPICH2LIB_CFLAGS   := -g -O0
+intel-debug: MPICH2LIB_CXXFLAGS := -g -O0
+intel-debug: MPICH2LIB_FFLAGS   := -g -O0
+intel-debug: MPICH2LIB_FCFLAGS  := -g -O0
+intel-debug: CONFIG_FLAGS       := --enable-fast=O0 --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+intel: CNAME              := intel
+intel: MPICH2LIB_CFLAGS   := -g -O2
+intel: MPICH2LIB_CXXFLAGS := -g -O2
+intel: MPICH2LIB_FFLAGS   := -g -O2
+intel: MPICH2LIB_FCFLAGS  := -g -O2
+intel: CONFIG_FLAGS       := --enable-fast=O2 --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+intel-opt: CNAME              := intel-opt
+intel-opt: MPICH2LIB_CFLAGS   := -O3
+intel-opt: MPICH2LIB_CXXFLAGS := -O3
+intel-opt: MPICH2LIB_FFLAGS   := -O3
+intel-opt: MPICH2LIB_FCFLAGS  := -O3
+intel-opt: CONFIG_FLAGS       := --enable-fast=O3,nochkmsg,notiming --enable-g=none --enable-nmpi-as-mpi
+
+# the pgi compilers need to have the path to their install directory when building
+pg%: CC      := pgcc
+pg%: CXX     := pgCC
+pg%: F77     := pgf77
+pg%: FC      := pgf90
+pg%: SED_ARG := s|/pgi/|/pgi-debug/|
+pgi-debug: CNAME              := pgi-debug
+pgi-debug: MPICH2LIB_CFLAGS   := -g -O0 -fPIC
+pgi-debug: MPICH2LIB_CXXFLAGS := -g -O0 -fPIC
+pgi-debug: MPICH2LIB_FFLAGS   := -g -O0 -fPIC
+pgi-debug: MPICH2LIB_FCFLAGS  := -g -O0 -fPIC
+pgi-debug: CONFIG_FLAGS       := --enable-fast=O0 --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+pgi: CNAME              := pgi
+pgi: MPICH2LIB_CFLAGS   := -g -O2 -fPIC
+pgi: MPICH2LIB_CXXFLAGS := -g -O2 -fPIC
+pgi: MPICH2LIB_FFLAGS   := -g -O2 -fPIC
+pgi: MPICH2LIB_FCFLAGS  := -g -O2 -fPIC
+pgi: CONFIG_FLAGS       := --enable-fast=O2 --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+pgi-opt: CNAME              := pgi-opt
+pgi-opt: MPICH2LIB_CFLAGS   := -O3 -fPIC
+pgi-opt: MPICH2LIB_CXXFLAGS := -O3 -fPIC
+pgi-opt: MPICH2LIB_FFLAGS   := -O3 -fPIC
+pgi-opt: MPICH2LIB_FCFLAGS  := -O3 -fPIC
+pgi-opt: CONFIG_FLAGS       := --enable-fast=O3,nochkmsg,notiming --enable-g=none --enable-nmpi-as-mpi
+
+# for some reason, we always turn off ptmalloc with pathscale?
+pathscal%: PTMALLOC := no
+pathscal%: CC      := pathcc
+pathscal%: CXX     := pathCC
+pathscal%: F77     := pathf90
+pathscal%: FC      := pathf90
+pathscal%: SED_ARG := s|/pathscale/|/pathscale-debug/|
+pathscale-debug: CNAME              := pathscale-debug
+pathscale-debug: MPICH2LIB_CFLAGS   := -g -O0
+pathscale-debug: MPICH2LIB_CXXFLAGS := -g -O0
+pathscale-debug: MPICH2LIB_FFLAGS   := -g -O0 -fno-second-underscore
+pathscale-debug: MPICH2LIB_FCFLAGS  := -g -O0 -fno-second-underscore
+pathscale-debug: CONFIG_FLAGS       := --enable-fast=O0 --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+pathscale: CNAME              := pathscale
+pathscale: MPICH2LIB_CFLAGS   := -g -O2
+pathscale: MPICH2LIB_CXXFLAGS := -g -O2
+pathscale: MPICH2LIB_FFLAGS   := -g -O2 -fno-second-underscore
+pathscale: MPICH2LIB_FCFLAGS  := -g -O2 -fno-second-underscore
+pathscale: CONFIG_FLAGS       := --enable-fast=O2 --enable-g=dbg --enable-error-checking=runtime --enable-error-messages=all --enable-nmpi-as-mpi
+pathscale-opt: CNAME              := pathscale-opt
+pathscale-opt: MPICH2LIB_CFLAGS   := -O3
+pathscale-opt: MPICH2LIB_CXXFLAGS := -O3
+pathscale-opt: MPICH2LIB_FFLAGS   := -O3 -fno-second-underscore
+pathscale-opt: MPICH2LIB_FCFLAGS  := -O3 -fno-second-underscore
+pathscale-opt: CONFIG_FLAGS       := --enable-fast=O3,nochkmsg,notiming --enable-g=none --enable-nmpi-as-mpi
+
+# specify the channel we'd like to build with
+ofa-%:       DEVICE_FLAGS := --with-rdma=gen2 --with-ib-include=/usr/include --with-ib-lib=/usr/lib64
+ofanem-%:    DEVICE_FLAGS := --with-device=ch3:nemesis:ib
+psm-%:       DEVICE_FLAGS := --with-device=ch3:psm
+#shmem-%:     DEVICE_FLAGS := --with-device=ch3:shm
+shmem-%:     DEVICE_FLAGS := --with-device=ch3:nemesis
+shmemnem-%:  DEVICE_FLAGS := --with-device=ch3:nemesis:shm
+
+#PMI:= --with-pm=no --with-pmi=slurm
+PMI:= --with-pm=no --with-pmi=pmgr --with-pmgr=/usr/local/tools/pmgr
+#PMI:= --with-pm=no --with-pmi=pmgr --with-pmgr=/g/g0/moody20/packages/pmgr_collective
+
+# export all variables to subshells
+export
+
+# Don't export any -j flags to subsequent make invocations. This
+#  doesn't work for some unknown reason.
+unexport MAKEFLAGS
+
+TARGETS   := $(foreach V, $(VARIANTS), $(foreach C, $(COMPILERS), $(V)-$(C)))
+
+all: $(COMPILERS)
+
+$(COMPILERS): %: $(addsuffix -%, $(VARIANTS))
+
+#	   maint/updatefiles &&
+$(TARGETS) :
+	@variant=`echo $@ | sed 's/-.*//'`; \
+	 if test "$(VERSION)" && test "$(INCLUDE_VARIANT_IN_PREFIX)"; then \
+	   export target=$@ PREFIX=$(PREFIXDIR)-$(CNAME)-$${variant}-$(VERSION); \
+	 else \
+	   export PREFIX=$(PREFIXDIR); \
+	 fi; \
+	 export F77_GETARGDECL=" "; \
+	 echo PREFIX=$$PREFIX CNAME=$(CNAME) variant=$$variant VERSION=$(VERSION) DEVICE_FLAGS=$(DEVICE_FLAGS); \
+	 echo Creating ./$(BUILDDIR)-$@; mkdir -p $(BUILDDIR)-$@ && \
+	 echo 'Building mvapich2-$@ (installed to '$$PREFIX')'; \
+	 \
+	 ( cd $(BUILDDIR)-$@ && \
+	   suffix=`echo $$variant | sed 's/shmem/smp/'` && \
+	   export CFLAGS="" && \
+           $(TOP_SRC_DIR)/configure \
+             --prefix=$${PREFIX} \
+             --enable-f77 --enable-fc --enable-cxx \
+             $(CONFIG_FLAGS) \
+             --enable-shared --enable-sharedlibs=gcc \
+             --enable-debuginfo \
+	     --disable-rpath \
+	     $(PMI) \
+             $(DEVICE_FLAGS) \
+             $(REG_CACHE) \
+             --enable-romio --with-file-system=nfs+ufs \
+             --disable-mpe --without-mpe && \
+	   echo Running make && sync && \
+           make $(SMP) VERBOSE=1 && \
+	   echo Running make install && sync && \
+           make install DESTDIR=$(MVAPICH_DESTDIR) || exit 1 \
+	 ) && \
+	 \
+	 grep -rlI $(TOP_SRC_DIR)/$(BUILDDIR)-$@ \
+           $(MVAPICH_DESTDIR)$${PREFIX} | xargs -ti perl -pi -e \
+	   's,$(TOP_SRC_DIR)/$(BUILDDIR)-$@,$${PREFIX}},g' {}; \
+	 grep -rlI $(MVAPICH_DESTDIR) $(MVAPICH_DESTDIR)$${PREFIX} | \
+	   xargs -ti perl -pi -e 's,$(MVAPICH_DESTDIR)/,,g' {}; \
+	 \
+	 for lib in mpich fmpich mpichcxx ; do \
+	   echo "Ensuring lib$${lib}.so was installed.."; \
+	   test -f $(MVAPICH_DESTDIR)$${PREFIX}/lib/lib$${lib}.so || exit 1; \
+	 done; \
+	 \
+	 chaos/fixup-debuginfo.sh \
+	   --srcdir=`pwd`/$(BUILDDIR)-$@ \
+	   --destdir=$(MVAPICH_DESTDIR) \
+	   --path=`echo $${PREFIX} | sed '$(SED_ARG)'` \
+	   `echo $@ | grep -q debug || echo --no-check` || :
+
+clean:
+	for d in BUILD/*; do \
+	   echo "Cleaning directory $$d" ; \
+	   $(MAKE) -C $$d clean || :; done;
+	rm -rf $(MVAPICH_DESTDIR)
+
+distclean: 
+	rm -rf BUILD
+	rm -rf $(MVAPICH_DESTDIR)
