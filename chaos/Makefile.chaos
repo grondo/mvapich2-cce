@@ -172,8 +172,8 @@ psm-%:       DEVICE_FLAGS := --with-device=ch3:psm
 shmem-%:     DEVICE_FLAGS := --with-device=ch3:nemesis
 shmemnem-%:  DEVICE_FLAGS := --with-device=ch3:nemesis:shm
 
-#PMI:= --with-pm=no --with-pmi=slurm
-PMI:= --with-pm=no --with-pmi=pmgr --with-pmgr=/usr/local/tools/pmgr
+PMI:= --with-pm=no --with-pmi=slurm
+#PMI:= --with-pm=no --with-pmi=pmgr --with-pmgr=/usr/local/tools/pmgr
 #PMI:= --with-pm=no --with-pmi=pmgr --with-pmgr=/g/g0/moody20/packages/pmgr_collective
 
 # export all variables to subshells
