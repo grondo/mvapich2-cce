@@ -37,7 +37,7 @@ CC_SHL          = @CC_SHL@
 C_COMPILE_SHL   = $(CC_SHL) $(DEFS) $(INCLUDES) $(CFLAGS) $(CPPFLAGS)
 FC               = @FC@
 FCFLAGS         = @FCFLAGS@
-FC_COMPILE      = $(FC) $(FCFLAGS) $(FCINCLUDES)
+FC_COMPILE      = $(FC) $(FCFLAGS) $(FCINCLUDES) $(INCLUDES)
 FC_SHL          = @FC_SHL@
 FC_COMPILE_SHL = $(FC_SHL) $(FCFLAGS) $(FCINCLUDES)
 
@@ -55,7 +55,7 @@ FCINCLUDES = @FCINCFLAG@.
 mpi_sources = create_f90_int.c create_f90_real.c \
 	create_f90_complex.c \
         typef90cmplxf.c typef90realf.c typef90intf.c
-INCLUDES = -I../../include -I${master_top_srcdir}/src/include
+INCLUDES = -I${srcdir} -I../../include -I${master_top_srcdir}/src/include
 doc_sources =
 
 .SUFFIXES:
