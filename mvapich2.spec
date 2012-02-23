@@ -28,8 +28,7 @@ Source:
 Group: Development/Languages
 License: BSD
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-AutoReq: no
-# BuildRequires: panfs-devel
+BuildRequires: panfs-devel
 BuildRequires: libibverbs-devel 
 BuildRequires: libibumad-devel 
 BuildRequires: libibcommon-devel
@@ -86,6 +85,7 @@ Requires: environment-modules module_helper
 Summary: MVAPICH2 package for OpenIB/ofa
 Group: Development/Languages
 Requires: libibverbs libibumad popt elfutils elfutils-libelf libsysfs
+Requires: environment-modules module_helper
 
 %description
 MVAPICH2 (MPI-2 over OpenFabrics-IB, OpenFabrics-iWARP, PSM, uDAPL and TCP/IP)
@@ -99,6 +99,7 @@ MVICH. The latest release is MVAPICH2 1.7a (includes MPICH2
 Summary: MVAPICH2 MPI library built for shmem only.
 Group: Development/Languages
 Provides: mvapich2-%{compiler}-shmem
+Requires: environment-modules module_helper
 
 %description shmem
 This version of MVAPICH2 has been compiled with shmem support
@@ -108,6 +109,7 @@ This version of MVAPICH2 has been compiled with shmem support
 Summary: MVAPICH2 MPI library built for InfiniPath
 Group: Development/Languages
 Provides: mvapich2-%{compiler}
+Requires: environment-modules module_helper
 
 %description psm
 This version of MVAPICH2 has been compiled with InfiniPath support.
@@ -120,6 +122,7 @@ Summary: Debug version and sources for MVAPICH2 library.
 Group: Development/Languages
 Requires: libibverbs libibumad popt elfutils elfutils-libelf libsysfs
 Provides: mvapich2-%{compiler}
+Requires: environment-modules module_helper
 
 %description debug
 MVAPICH2 IB/ofa libraries built with -O0. Also includes sources
@@ -128,7 +131,8 @@ for debugging purposes.
 %package debug-shmem 
 Summary: Debug version and sources for MVAPICH2 shmem library.
 Group: Development/Languages
-provides: mvapich2-%{compiler}
+Provides: mvapich2-%{compiler}
+Requires: environment-modules module_helper
 
 %description debug-shmem
 MVAPICH2 shared memory libraries built with -O0. Also includes sources
@@ -138,6 +142,7 @@ for debugging purposes.
 Summary: Debug version and sources for MVAPICH2 shmem library.
 Group: Development/Languages
 Provides: mvapich2-%{compiler}
+Requires: environment-modules module_helper
 
 %description debug-psm
 MVAPICH2 shared memory libraries built with -O0. Also includes sources
@@ -232,7 +237,7 @@ mpi_compiler_links()
 for cc in $COMPILERS; do
    for variant in $VARIANTS; do
        basedir=%{mvapich_prefix}-${cc}-${variant}-%{mpi_version}
-       docdir=$RPM_BUILD_ROOT/${basedir}/doc
+       docdir=$RPM_BUILD_ROOT/${basedir}/share/doc
 
        mpi_compiler_links ${cc} ${basedir}/bin
 
