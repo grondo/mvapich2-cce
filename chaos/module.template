@@ -20,7 +20,7 @@ set vendor  __COMPILER__
 set device  __DEVICE__
 set tool    mpi
 set prefix  /opt/$name-$vendor-$device-$version
-set libdir  $prefix/lib/shared
+set libdir  $prefix/lib
 set template  /opt/modules/templates/$tool
 	                                    
 source $template
