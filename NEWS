@@ -1,3 +1,7 @@
+Version 1.7.0-14chaos:
+ - Fix environment-modules template to point to correct libdir
+ - Fix RPM install-time dependencies.
+
 Version 1.7.0-13chaos:
  - Fix 3rd party compiler builds for /opt.
 
